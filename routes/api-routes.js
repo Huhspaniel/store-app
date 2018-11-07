@@ -9,8 +9,12 @@ module.exports = function (app) {
     });
 
     app.post('/api/products', (req, res) => {
-        db.Product.create(req.body)
-            .then(data => res.json(data))
-            .catch(err => res.json({ error: err }));
+        if (req.header('Signature') === process.env.API_KEY) {
+            db.Product.create(req.body)
+                .then(data => res.json(data))
+                .catch(err => res.json({ error: err }));
+        } else {
+            res.status(401).send('401 Unauthorized');
+        }
     });
 }
