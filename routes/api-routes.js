@@ -1,20 +1,34 @@
-const path = require('path');
 const db = require('../models');
+const RestfulAPI = require('./ResfulAPI');
+
+const authenticate = function (req, res, next) {
+    if (req.header('API_KEY') === process.env.API_KEY) {
+        next();
+    } else {
+        res.status(401).send('401 Unauthorized');
+    }
+}
 
 module.exports = function (app) {
-    app.get('/api/products', (req, res) => {
-        db.Product.findAll()
-            .then(data => res.json(data))
-            .catch(err => res.json({ error: err }));
-    });
+    const products = new RestfulAPI('products', db.product, app);
+    const producers = new RestfulAPI('producers', db.producer, app);
+    const departments = new RestfulAPI('departments', db.department, app);
 
-    app.post('/api/products', (req, res) => {
-        if (req.header('Signature') === process.env.API_KEY) {
-            db.Product.create(req.body)
-                .then(data => res.json(data))
-                .catch(err => res.json({ error: err }));
-        } else {
-            res.status(401).send('401 Unauthorized');
-        }
-    });
+    products.findAll(null, [db.department, db.producer]);
+    products.findOne('id', [db.department, db.producer]);
+    products.create(authenticate);
+    products.update('id', authenticate);
+    products.delete('id', authenticate);
+
+    departments.findAll(null, [db.product]);
+    departments.findOne('name', [db.product]);
+    departments.create(authenticate);
+    departments.update('name', authenticate);
+    departments.delete('name', authenticate);
+
+    producers.findAll(null, [db.product]);
+    producers.findOne('name', [db.product]);
+    producers.create(authenticate);
+    producers.update('name', authenticate);
+    producers.delete('name', authenticate);
 }

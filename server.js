@@ -2,17 +2,18 @@ const express = require('express');
 const path = require('path');
 const PORT = process.env.PORT || 8080;
 const db = require('./models');
+const env = process.env.NODE_ENV || 'development';
 
 const app = express();
 
-// app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 require('./routes/api-routes')(app);
 require('./routes/html-routes')(app);
 
-db.sequelize.sync().then(function() {
+db.sequelize.sync({ force: env === 'development' }).then(function() {
     app.listen(PORT, function() {
         console.log(`App listening on http://localhost:${PORT}`);
     });
