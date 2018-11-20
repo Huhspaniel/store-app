@@ -12,14 +12,14 @@ module.exports = function (connection, Sequelize) {
         product_variant.belongsTo(models.sku, {
             foreignKey: {
                 allowNull: false,
-                primaryKey: true
+                unique: 'sku_attribute'
             }
         });
         product_variant.belongsTo(models.product_attribute, {
             foreignKey: {
                 name: 'attribute_id',
                 allowNull: false,
-                primaryKey: true
+                unique: 'sku_attribute'
             }
         });
         product_variant.belongsTo(models.product_attribute_value, {

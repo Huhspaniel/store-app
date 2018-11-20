@@ -10,12 +10,12 @@ module.exports = function(connection, Sequelize) {
         }
     })
     department.associate = function (models) {
-        department.hasMany(models.product, {
-            foreignKey: {
-                allowNull: false,
-                unique: 'product'
-            }
-        });
+        // department.hasMany(models.product, {
+        //     foreignKey: {
+        //         allowNull: false,
+        //         unique: 'department_product'
+        //     }
+        // });
     }
 
     return department;

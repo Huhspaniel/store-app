@@ -7,12 +7,13 @@ module.exports = function(connection, Sequelize) {
     })
 
     producer.associate = function (models) {
-        producer.belongsToMany(models.product, {
-            through: 'product_producers'
-        });
+        // producer.belongsToMany(models.product, {
+        //     through: 'product_producers'
+        // });
         producer.belongsTo(models.producer_type, {
             foreignKey: {
-                allowNull: false
+                allowNull: false,
+                name: 'type'
             }
         })
     }

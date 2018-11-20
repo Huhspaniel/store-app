@@ -7,7 +7,10 @@ module.exports = function (connection, Sequelize) {
         },
         price: {
             type: Sequelize.DECIMAL,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                min: 0
+            }
         },
         description: {
             type: Sequelize.STRING
@@ -15,8 +18,11 @@ module.exports = function (connection, Sequelize) {
         in_stock: {
             type: Sequelize.BOOLEAN
         },
-        img: {
-            type: Sequelize.STRING.BINARY
+        img_url: {
+            type: Sequelize.STRING,
+            validate: {
+                isUrl: true
+            }
         },
     })
 
@@ -31,16 +37,16 @@ module.exports = function (connection, Sequelize) {
             }
         });
 
-        product.hasMany(models.product_attribute, {
-            foreignKey: {
-                allowNull: false
-            }
-        });
-        product.hasMany(models.sku, {
-            foreignKey: {
-                allowNull: false
-            }
-        });
+        // product.hasMany(models.product_attribute, {
+        //     foreignKey: {
+        //         allowNull: false
+        //     }
+        // });
+        // product.hasMany(models.sku, {
+        //     foreignKey: {
+        //         allowNull: false
+        //     }
+        // });
     }
 
     return product;

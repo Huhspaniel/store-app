@@ -5,7 +5,11 @@ module.exports = {
     database: "bamazon",
     host: "localhost",
     port: 3306,
-    dialect: "mysql"
+    dialect: "mysql",
+    define: {
+      underscored: true,
+      underscoredAll: true
+    }
   },
   test: {
     username: "root",
@@ -15,6 +19,10 @@ module.exports = {
     dialect: "mysql"
   },
   production: {
-    use_env_variable: "JAWSDB_URL"
+    use_env_variable: "JAWSDB_URL",
+    define: {
+      underscored: true,
+      underscoredAll: true
+    }
   }
 }

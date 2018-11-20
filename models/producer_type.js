@@ -3,16 +3,17 @@ module.exports = function(connection, Sequelize) {
         name: {
             type: Sequelize.STRING,
             allowNull: false,
-            unique: true
+            primaryKey: true
         }
     })
 
     producer_type.associate = function (models) {
-        producer_type.hasMany(models.producer, {
-            foreignKey: {
-                allowNull: false
-            }
-        });
+        // producer_type.hasMany(models.producer, {
+        //     foreignKey: {
+        //         allowNull: false,
+        //         name: 'type'
+        //     }
+        // });
     }
 
     return producer_type;

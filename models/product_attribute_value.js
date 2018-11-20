@@ -8,9 +8,16 @@ module.exports = function(connection, Sequelize) {
     product_attribute_value.associate = function (models) {
         product_attribute_value.belongsTo(models.product_attribute, {
             foreignKey: {
+                name: 'attribute_id',
                 allowNull: false
             }
-        })
+        });
+        // product_attribute_value.hasMany(models.product_variant, {
+        //     foreignKey: {
+        //         name: 'value_id',
+        //         allowNull: false
+        //     }
+        // })
     }
 
     return product_attribute_value;
