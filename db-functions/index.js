@@ -10,11 +10,12 @@ module.exports = function (db) {
             ));
             return attributes;
         }, []);
-        return (() => {
+        return new Promise((resolve, reject) => {
             if (product.department && String(product.department).match(/[a-z]/i))
-                return db.department.findOne({ where: { name: product.department } })
-            else return new Promise(res => res({ id: product.department }));
-        })().then(({ id: department_id }) => {
+                db.department.findOne({ where: { name: product.department } })
+                    .then(resolve).catch(reject);
+            else resolve({ id: product.department })
+        }).then(({ id: department_id }) => {
             if (!product.department_id) product.department_id = department_id;
             return db.product.create(product)
         }).then(resProduct => {
@@ -79,11 +80,7 @@ module.exports = function (db) {
         })
     }
     function bulkCreateProducts(products) {
-        var promise;
-        for (let { product, variants } of products) {
-            promise = promise ?
-                promise.then(() => createProduct(product, variants)) : createProduct(product, variants);
-        }
-        return promise ? promise : new Promise(resolve => resolve([]));
+        const productsPromises = products.map(({ product, variants }) => createProduct(product, variants));
+        return Promise.all(productsPromises);
     }
 }

@@ -134,6 +134,13 @@ module.exports = function () {
                 model: 'S',
                 storage: '500 GB'
             }
+        }, {
+            name: 'Xbox One 500 GB',
+            price: 120,
+            stock: 100,
+            attributes: {
+                storage: '500 GB'
+            }
         }]
     }]))
 }
