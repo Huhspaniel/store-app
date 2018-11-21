@@ -1,7 +1,8 @@
-const db = require('./models');
+const db = require('./db');
+const { bulkCreateProducts } = db._ƒ;
 
-module.exports = async function () {
-    await db.department.bulkCreate([{
+module.exports = function () {
+    return db.department.bulkCreate([{
         name: 'Cellphones'
     }, {
         name: 'Video Games'
@@ -13,8 +14,7 @@ module.exports = async function () {
         name: 'Furniture'
     }, {
         name: 'Musical Instruments'
-    }])
-    await db.producer_type.bulkCreate([{
+    }]).then(() => db.producer_type.bulkCreate([{
         name: 'other'
     }, {
         name: 'corporation',
@@ -24,8 +24,7 @@ module.exports = async function () {
         name: 'director'
     }, {
         name: 'independent'
-    }])
-    await db.producer.bulkCreate([{
+    }])).then(() => db.producer.bulkCreate([{
         name: 'Apple',
         type: 'corporation'
     }, {
@@ -52,48 +51,89 @@ module.exports = async function () {
     }, {
         name: 'Activision',
         type: 'corporation'
-    }])
-    await db.product.bulkCreate([{
-        name: 'iPhone X, Fully Unlocked, 64 GB',
-        price: 1070,
-        department_id: 1,
-        img_url: 'https://images-na.ssl-images-amazon.com/images/I/51qibZNVexL._SL1050_.jpg'
+    }])).then(() => bulkCreateProducts([{
+        product: {
+            name: 'iPhone X, Fully Unlocked',
+            price: 1050,
+            department: 'Cellphones',
+            producer_ids: [1],
+            img_url: 'https://images-na.ssl-images-amazon.com/images/I/51qibZNVexL._SL1050_.jpg'
+        }, variants: [{
+            name: 'iPhone X, Fully Unlocked, 64 GB, Space Gray',
+            price: 1050,
+            stock: 100,
+            attributes: {
+                color: 'Space Gray',
+                storage: '64 GB'
+            }
+        }, {
+            name: 'iPhone X, Fully Unlocked, 64 GB, Silver',
+            price: 1021.99,
+            stock: 100,
+            attributes: {
+                color: 'Silver',
+                storage: '64 GB'
+            }
+        }, {
+            name: 'iPhone X, Fully Unlocked, 256 GB, Space Gray',
+            price: 1500,
+            stock: 100,
+            attributes: {
+                color: 'Space Gray',
+                storage: '256 GB'
+            }
+        }, {
+            name: 'iPhone X, Fully Unlocked, 256 GB, Silver',
+            price: 1500,
+            stock: 100,
+            attributes: {
+                color: 'Silver',
+                storage: '256 GB'
+            }
+        }]
     }, {
-        name: 'iPhone 6, GSM Unlocked, 64 GB',
-        price: 199.99,
-        department_id: 1,
-        img_url: 'https://images-na.ssl-images-amazon.com/images/I/51bvItLxhqL.jpg'
-    }, {
-        name: 'Xbox One X Console',
-        price: 470,
-        department_id: 2,
-        img_url: 'https://images-na.ssl-images-amazon.com/images/I/61ux1cU49XL._AC_.jpg'
-    }, {
-        name: 'Call of Duty: Black Ops 4',
-        price: 60,
-        department_id: 2,
-        img_url: 'https://images-na.ssl-images-amazon.com/images/I/812vQ9aeXML._AC_SL1500_.jpg'
-    }, {
-        name: '4 Film Favorites: The Matrix Collection',
-        price: 12.99,
-        department_id: 4,
-        img_url: 'https://images-na.ssl-images-amazon.com/images/I/61jv6LrpiqL.jpg'
-    }, {
-        name: 'The Lord of the Rings',
-        price: 55,
-        department_id: 3
-    }, {
-        name: 'The Lord of the Rings',
-        price: 10,
-        department_id: 4
-    }, {
-        name: 'Nord Stage 3',
-        price: 4500,
-        department_id: 6
-    }])
-    await db.sku.create({
-        product_id: 1,
-        name: 'iPhone X, Fully Unlocked, 64 GB, Space Gray',
-        stock: 100
-    })
+        product: {
+            name: 'Xbox One Console',
+            price: 399,
+            img_url: 'https://static.gamespot.com/uploads/original/1179/11799911/2555159-newxbox.jpg',
+            department: 2,
+        },
+        variants: [{
+            name: 'Xbox One X 1TB',
+            price: 399,
+            stock: 100,
+            img_url: 'https://images-na.ssl-images-amazon.com/images/I/51twrJq61UL._AC_.jpg',
+            attributes: {
+                model: 'X',
+                storage: '1 TB'
+            }
+        }, {
+            name: 'Xbox One X 2TB',
+            price: 599,
+            stock: 100,
+            img_url: 'https://images-na.ssl-images-amazon.com/images/I/51twrJq61UL._AC_.jpg',
+            attributes: {
+                model: 'X',
+                storage: '2 TB'
+            }
+        }, {
+            name: 'Xbox One S 1TB',
+            price: 299,
+            stock: 100,
+            img_url: 'https://images-na.ssl-images-amazon.com/images/I/51DvIl32U8L._AC_.jpg',
+            attributes: {
+                model: 'S',
+                storage: '1 TB'
+            }
+        }, {
+            name: 'Xbox One S 500GB',
+            price: 199,
+            stock: 100,
+            img_url: 'https://images-na.ssl-images-amazon.com/images/I/51DvIl32U8L._AC_.jpg',
+            attributes: {
+                model: 'S',
+                storage: '500 GB'
+            }
+        }]
+    }]))
 }

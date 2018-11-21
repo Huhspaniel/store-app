@@ -1,7 +1,7 @@
 module.exports = function (connection, Sequelize) {
     const product_variant = connection.define('product_variant', {
 
-    }, { underscored: true })
+    })
 
     product_variant.associate = function (models) {
         product_variant.belongsTo(models.product, {

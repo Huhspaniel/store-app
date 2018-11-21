@@ -1,7 +1,8 @@
+// server.js
 const express = require('express');
 const path = require('path');
 const PORT = process.env.PORT || 8080;
-const db = require('./models');
+const db = require('./db');
 const env = process.env.NODE_ENV || 'development';
 const force = env === 'development';
 
@@ -15,8 +16,9 @@ require('./routes/api-routes')(app);
 require('./routes/html-routes')(app);
 
 db.sequelize.sync({ force: force }).then(function () {
-    app.listen(PORT, async function () {
-        if (force) await require('./seeds.js')();
-        console.log(`App listening on http://localhost:${PORT}`);
+    app.listen(PORT, function () {
+        var seeds = new Promise(res => res());
+        if (force) seeds = require('./seeds.js')();
+        seeds.then(() => console.log(`~~~ App listening on http://localhost:${PORT} ~~~`));
     });
 });

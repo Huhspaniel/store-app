@@ -26,6 +26,7 @@ fs
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+db._ƒ = require('../db-functions')(db);
 
 Object.keys(db).forEach(function (modelName) {
   if (db[modelName].associate) {

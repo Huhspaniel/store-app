@@ -5,14 +5,16 @@ module.exports = function(connection, Sequelize) {
             allowNull: false,
             validate: {
                 is: /^[a-z -()]+$/i
-            }
+            },
+            unique: 'product_attribute'
         }
     })
 
     product_attribute.associate = function (models) {
         product_attribute.belongsTo(models.product, {
             foreignKey: {
-                allowNull: false
+                allowNull: false,
+                unique: 'product_attribute'
             }
         })
         // product_attribute.hasMany(models.product_attribute_value, {

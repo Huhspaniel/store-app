@@ -1,4 +1,4 @@
-const db = require('../models');
+const db = require('../db');
 const RestfulAPI = require('./ResfulAPI');
 
 const authenticate = function (req, res, next) {

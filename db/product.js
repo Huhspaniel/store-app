@@ -16,7 +16,8 @@ module.exports = function (connection, Sequelize) {
             type: Sequelize.STRING
         },
         in_stock: {
-            type: Sequelize.BOOLEAN
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
         },
         img_url: {
             type: Sequelize.STRING,
