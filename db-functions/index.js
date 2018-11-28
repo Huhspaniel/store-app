@@ -1,9 +1,15 @@
+Array.prototype.pushIfNotExist = function (passedVal, compare, alt) {
+    const index = this.findIndex(val => {
+        return compare ? compare(passedVal, val) : passedVal === val;
+    });
+    if (index < 0) this.push(passedVal);
+    else if (alt) alt.bind(this)(index);
+}
 module.exports = function (db) {
     return {
         createProduct: createProduct,
         bulkCreateProducts: bulkCreateProducts
     };
-
     function findDepartmentId(department) {
         return new Promise((resolve, reject) => {
             if (department && String(department).match(/[a-z]/i))
@@ -31,13 +37,36 @@ module.exports = function (db) {
             return sku;
         }), { individualHooks: true })
     }
-    function createProduct(product, variants) {
-        const passedAttributes = variants.reduce((attributes, variant, i) => {
-            attributes.push(...Object.entries(variant.attributes).map(
-                attribute => ({ name: attribute[0], value: attribute[1], index: i })
-            ));
-            return attributes;
+    function parseSkus(skus) {
+        const attributes = skus.reduce((accumulator, sku) => {
+            Object.entries(sku.attributes).forEach(([attr, value]) => {
+                accumulator.pushIfNotExist(
+                    { name: attr, values: [value] },
+                    (a, b) => a.name === b.name,
+                    function (i) { this[i].values.pushIfNotExist(value) }
+                )
+            })
+            return accumulator;
         }, []);
+        const values = attributes.reduce((accumulator, { name: attribute_name, values }, i) => {
+            accumulator.push(...values.map(val => ({ value: val, attribute: attribute_name, attribute_index: i })));
+            return accumulator;
+        }, []);
+        const variants = skus.reduce((accumulator, sku, i) => {
+            accumulator.push(
+                ...Object.entries(sku.attributes)
+                    .map(([attr, val]) => ({ sku_index: i, attribute: attr, value: val }))
+            )
+            return accumulator;
+        }, [])
+        return {
+            attributes: attributes, // [{ name, values[] }]
+            values: values, // [{ value, attribute, attribute_index }]
+            variants: variants // [{ sku_index, attribute, value }]
+        }
+    }
+    function createProduct(product, skus) {
+        const { attributes, values, variants } = parseSkus(skus);
         return findDepartmentId(product.department)
             .then(department_id => {
                 product.department_id = product.department_id || department_id;
@@ -45,41 +74,31 @@ module.exports = function (db) {
             }).then(db_product => {
                 product.id = db_product.id;
                 if (product.producer_ids) return addProducers(product.id, product.producer_ids)
-            }).then(() => bulkCreateSkus(variants, product.id))
-            .then(skus => {
+            }).then(() => bulkCreateSkus(skus, product.id))
+            .then(db_skus => {
                 return db.product_attribute.bulkCreate(
-                    passedAttributes.map(({ name }) => ({ name: name, product_id: product.id }))
-                        .filter(({ name: currName }, i, arr) => {
-                            return arr.findIndex(({ name }) => name === currName) === i
-                        })
-                ).then(attributes => {
+                    attributes.map(({ name }) => ({ name: name, product_id: product.id }))
+                ).then(db_attributes => {
                     return db.product_attribute_value.bulkCreate(
-                        attributes.reduce((values, { id, name: currAttr }, i) => {
-                            values.push(
-                                ...passedAttributes.filter(({ name }) => name === currAttr)
-                                    .map(({ value }) => ({ value: value, attribute_id: id }))
-                            )
-                            return values;
-                        }, [])
-                    ).then(values => {
+                        values.map(val => {
+                            val.attribute_id = db_attributes[val.attribute_index].id;
+                            return val;
+                        })
+                    ).then(db_values => {
                         return db.product_variant.bulkCreate(
-                            variants.reduce((variations, variant, i) => {
-                                variations.push(...Object.entries(variant.attributes).map(passedAttr => {
-                                    const product_id = product.id;
-                                    const sku_id = skus[i].id;
-                                    const attribute_id = attributes.find(attr => attr.name === passedAttr[0]).id;
-                                    const value_id = values.find(val => {
-                                        return val.attribute_id === attribute_id && val.value === passedAttr[1];
-                                    }).id;
-                                    return {
-                                        product_id: product_id,
-                                        sku_id: sku_id,
-                                        attribute_id: attribute_id,
-                                        value_id: value_id
-                                    };
-                                }))
-                                return variations;
-                            }, [])
+                            variants.map(variant => {
+                                const attribute_id = db_attributes.find(
+                                    attr => attr.name === variant.attribute
+                                ).id;
+                                return {
+                                    product_id: product.id,
+                                    sku_id: db_skus[variant.sku_index].id,
+                                    attribute_id: attribute_id,
+                                    value_id: db_values.find(
+                                        val => val.attribute_id === attribute_id && val.value === variant.value
+                                    ).id
+                                }
+                            })
                         )
                     })
                 })
