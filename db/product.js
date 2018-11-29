@@ -38,16 +38,18 @@ module.exports = function (connection, Sequelize) {
             }
         });
 
-        // product.hasMany(models.product_attribute, {
-        //     foreignKey: {
-        //         allowNull: false
-        //     }
-        // });
-        // product.hasMany(models.sku, {
-        //     foreignKey: {
-        //         allowNull: false
-        //     }
-        // });
+        product.hasMany(models.product_attribute, {
+            foreignKey: {
+                allowNull: false,
+                unique: 'product_attribute'
+            }
+        });
+        product.hasMany(models.sku, {
+            onDelete: 'cascade',
+            foreignKey: {
+                allowNull: false
+            }
+        });
     }
 
     return product;

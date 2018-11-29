@@ -97,6 +97,7 @@ module.exports = function () {
             price: 399,
             img_url: 'https://static.gamespot.com/uploads/original/1179/11799911/2555159-newxbox.jpg',
             department: 2,
+            producer_ids: [1, 3]
         },
         variants: [{
             name: 'Xbox One X 1TB',
