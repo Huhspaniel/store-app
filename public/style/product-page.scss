@@ -1,23 +1,13 @@
-h1 {
+.product-info {
     width: 100%;
-    text-align: center;
-    font-size: 30px;
-    padding: 20px;
-}
-body {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-.products {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
     .product {
         box-sizing: border-box;
         margin: 5px;
         padding: 10px;
-        box-shadow: 0 0 5px black;
+        // box-shadow: 0 0 5px black;
         display: grid;
         grid-template-rows: min-content min-content 1fr;
         grid-template-columns: 1fr;

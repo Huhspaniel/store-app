@@ -1,0 +1,23 @@
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; }
+
+.products .product {
+  box-sizing: border-box;
+  margin: 5px;
+  padding: 10px;
+  box-shadow: 0 0 5px black;
+  display: grid;
+  grid-template-rows: min-content min-content 1fr;
+  grid-template-columns: 1fr;
+  height: 100vh;
+  width: 100vw;
+  max-height: 300px;
+  max-width: 300px; }
+
+.products .product img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  object-position: center; }
