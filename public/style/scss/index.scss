@@ -53,9 +53,6 @@ a {
     text-align: right;
     float: right;
 }
-.hidden {
-    display: none;
-}
 header {
     display: flex;
     flex-direction: column;
@@ -76,4 +73,11 @@ nav {
 footer {
     text-align: center;
     padding: 20px;
+}
+
+@import "_home-page.scss";
+@import "_product-page.scss";
+
+.hidden {
+    display: none;
 }

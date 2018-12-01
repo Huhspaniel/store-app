@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "sass": "node-sass -w ./public/style -o ./public/style"
+    "sass": "node-sass -w ./public/style/scss/index.scss -o ./public/style -r"
   },
   "keywords": [],
   "author": "",

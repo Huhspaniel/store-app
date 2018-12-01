@@ -10,8 +10,6 @@
     <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel="stylesheet" href="style/index.css">
-    <link rel="stylesheet" href="style/home-page.css">
-    <link rel="stylesheet" href="style/product-page.css">
 </head>
 
 <body>
@@ -28,6 +26,12 @@
         <main class="product-page hidden" data-path="/product">
             <div class="product-attributes"></div>
             <div class="product-info"></div>
+            <form class="order-form">
+                Quantity: 
+                <input type="number" class="product-quantity">
+                <button class="submit-order">Buy</button>
+                <div class="total-price"></div>
+            </form>
         </main>
         <main id="notfound" class="hidden">
             404 Not Found
