@@ -4,7 +4,7 @@ const path = require('path');
 const PORT = process.env.PORT || 8080;
 const db = require('./db');
 const env = process.env.NODE_ENV || 'development';
-let force = env === 'development';
+const force = env === 'development';
 
 const app = express();
 
@@ -14,9 +14,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 require('./routes/api-routes')(app);
 require('./routes/html-routes')(app);
-
-// Uncomment line below to clear database and seed with seeds.js
-force = true;
 
 db.sequelize.sync({ force: force }).then(function () {
     app.listen(PORT, function () {
