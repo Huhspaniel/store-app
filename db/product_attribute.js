@@ -16,20 +16,20 @@ module.exports = function(connection, Sequelize) {
                 allowNull: false,
                 unique: 'product_attribute'
             }
-        })
-        // product_attribute.hasMany(models.product_attribute_value, {
-        //     foreignKey: {
-        //         name: 'attribute_id',
-        //         allowNull: false
-        //     }
-        // })
-        // product_attribute.hasMany(models.product_variant, {
-        //     foreignKey: {
-        //         name: 'attribute_id',
-        //         allowNull: false,
-        //         unique: 'sku_attribute'
-        //     }
-        // })
+        });
+        product_attribute.hasMany(models.product_attribute_value, {
+            foreignKey: {
+                name: 'attribute_id',
+                allowNull: false
+            }
+        });
+        product_attribute.hasMany(models.product_variant, {
+            foreignKey: {
+                name: 'attribute_id',
+                allowNull: false,
+                unique: 'sku_attribute'
+            }
+        });
     }
 
     return product_attribute;

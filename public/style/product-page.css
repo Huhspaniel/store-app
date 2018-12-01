@@ -1,0 +1,34 @@
+main.product-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+main.product-page h2 {
+  font-size: 20px; }
+
+main.product-page .product-attributes {
+  padding: 10px; }
+
+main.product-page .product-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+main.product-page .product-info .product {
+  box-sizing: border-box;
+  margin: 5px;
+  padding: 10px;
+  display: grid;
+  grid-template-rows: min-content 1fr;
+  grid-template-columns: 1fr;
+  height: 100vh;
+  width: 100vw;
+  max-height: 300px;
+  max-width: 300px; }
+
+main.product-page .product-info .product img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  object-position: center; }

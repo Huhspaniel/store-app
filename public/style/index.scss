@@ -1,0 +1,31 @@
+body {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: min-content 1fr min-content;
+    grid-template-columns: 1fr;
+    font-family: 'PT Sans', sans-serif;
+}
+.hidden {
+    display: none;
+}
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+h1 {
+    width: 100%;
+    text-align: center;
+    font-size: 35px;
+    padding: 20px;
+}
+nav {
+    text-align: center;
+    padding: 10px;
+    font-size: 18px;
+}
+footer {
+    text-align: center;
+    padding: 20px;
+}

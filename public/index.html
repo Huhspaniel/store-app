@@ -1,15 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Store-App</title>
+    <title>Bamazon</title>
 
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/index.css">
+    <link rel="stylesheet" href="style/home-page.css">
+    <link rel="stylesheet" href="style/product-page.css">
 </head>
+
 <body>
-    <h1>Home</h1>
+    <header>
+        <h1>Bamazon</h1>
+        <nav>
+            <a href="/">Home</a>
+        </nav>
+    </header>
+    <div class="routes">
+        <main class="home-page hidden" data-path="/">
+            <div class="products"></div>
+        </main>
+        <main class="product-page hidden" data-path="/product">
+            <div class="product-attributes"></div>
+            <div class="product-info"></div>
+        </main>
+        <main id="notfound" class="hidden">
+            404 Not Found
+        </main>
+    </div>
+    <footer>
+        Copyright © Daniel Ferreira 2018
+    </footer>
 </body>
+<script src="js/api.js"></script>
+<script src="js/components.js"></script>
+<script src="js/home-page.js"></script>
+<script src="js/product-page.js"></script>
+<script src="js/app.js"></script>
+
 </html>

@@ -47,12 +47,12 @@ module.exports = function (connection, Sequelize) {
         //             .catch(err => console.log(err));
         //     }
         // });
-        // sku.hasMany(models.product_variant, {
-        //     foreignKey: {
-        //         allowNull: false,
-        //         unique: 'sku_attribute'
-        //     }
-        // });
+        sku.hasMany(models.product_variant, {
+            foreignKey: {
+                allowNull: false,
+                unique: 'sku_attribute'
+            }
+        });
     }
 
     return sku;

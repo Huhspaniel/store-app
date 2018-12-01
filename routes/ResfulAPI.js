@@ -21,8 +21,9 @@ module.exports = class RestfulAPI {
     }
     findOne(identifier, associates, ...middleware) {
         this.app.get(`/api/${this.resource}/:${identifier}`, ...middleware, (req, res) => {
+            console.log(req.params);
             this.model.findOne({
-                where: { [identifier]: req.params.identifier },
+                where: { [identifier]: req.params[identifier] },
                 include: associates || undefined
             })
                 .then(data => res.json(data))
