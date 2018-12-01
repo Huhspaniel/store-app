@@ -68,6 +68,7 @@ module.exports = function () {
             name: 'iPhone X, Fully Unlocked, 64 GB, Space Gray',
             price: 1050,
             stock: 100,
+            img_url: 'https://images-na.ssl-images-amazon.com/images/I/81ReA1gb8sL._SL1500_.jpg',
             attributes: {
                 color: 'Space Gray',
                 storage: '64 GB'
@@ -84,6 +85,7 @@ module.exports = function () {
             name: 'iPhone X, Fully Unlocked, 256 GB, Space Gray',
             price: 1500,
             stock: 100,
+            img_url: 'https://images-na.ssl-images-amazon.com/images/I/81ReA1gb8sL._SL1500_.jpg',
             attributes: {
                 color: 'Space Gray',
                 storage: '256 GB'

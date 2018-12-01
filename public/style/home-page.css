@@ -4,9 +4,6 @@ main.home-page h2 {
 main.home-page a {
   text-decoration: none; }
 
-main.home-page a:visited {
-  color: inherit; }
-
 main.home-page .products {
   display: flex;
   flex-wrap: wrap;
