@@ -3,6 +3,9 @@ main.product-page {
   flex-direction: column;
   align-items: center; }
 
+main.product-page h2 {
+  font-size: 20px; }
+
 main.product-page .product-attributes {
   padding: 10px; }
 

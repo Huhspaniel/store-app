@@ -1,7 +1,18 @@
+main.home-page h2 {
+  font-size: 20px; }
+
+main.home-page a {
+  text-decoration: none; }
+
+main.home-page a:visited {
+  color: inherit; }
+
 main.home-page .products {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; }
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto; }
 
 main.home-page .products .product {
   box-sizing: border-box;
@@ -21,3 +32,6 @@ main.home-page .products .product img {
   width: 100%;
   object-fit: contain;
   object-position: center; }
+
+main.home-page .products .product:hover {
+  box-shadow: 0 0 10px black; }

@@ -1,8 +1,22 @@
 main.home-page {
+
+    h2 {
+        font-size: 20px;
+    }
+
+    a {
+        text-decoration: none;
+        &:visited {
+            color: inherit;
+        }
+    }
+
     .products {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        max-width: 1200px;
+        margin: 0 auto;
     
         .product {
             box-sizing: border-box;
@@ -23,6 +37,10 @@ main.home-page {
                 width: 100%;
                 object-fit: contain;
                 object-position: center;
+            }
+
+            &:hover {
+                box-shadow: 0 0 10px black;
             }
         }
     }

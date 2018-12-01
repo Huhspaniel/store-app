@@ -4,10 +4,10 @@ const Sku = props => {
         `<div class=product key=${props.id}>
             <div>
                 <h2>${props.name || props.product.name}</h2>
-                <h2>$${props.price || props.product.price}</h2>
-                <h2 style="color:${goodStock ? 'green' : 'red'}">
+                <h3>$${props.price || props.product.price}</h3>
+                <h3 style="color:${goodStock ? 'green' : 'red'}">
                     ${goodStock ? 'In Stock' : props.stock ? `Only ${props.stock} left in stock` : 'Out of Stock'}
-                </h2>
+                </h3>
             </div>
             <img src="${props.img_url || props.product.img_url}" alt="product image"/>
         </div>`
