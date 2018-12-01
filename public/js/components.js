@@ -14,12 +14,15 @@ const Sku = props => {
     )
 }
 
-const AttributeSelect = props => (
-    `<select name="${props.id}" key="${props.id}" value="${props.selected_value}">
-        <option value="" disabled selected>Select ${props.name}</option>
-        ${props.product_attribute_values.map(value => (
-        `<option value="${value.id}" key="${value.id}" 
-            ${value.value === props.selected_value ? 'selected' : ''}>${value.value}</option>`
-    )).join('')}
-    </select>`
-)
+const AttributeSelect = props => {
+    const isNamed = !props.name.match(/^_/);
+    return (
+        `<select name="${props.id}" key="${props.id}" value="${props.selected_value}">
+            ${isNamed ? `<option value="" disabled selected>Select ${props.name}</option>` : ''}
+            ${props.product_attribute_values.map(value => (
+            `<option value="${value.id}" key="${value.id}" 
+                ${value.value === props.selected_value ? 'selected' : ''}>${value.value}</option>`
+        )).join('')}
+        </select>`
+    )
+}

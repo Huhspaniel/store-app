@@ -223,5 +223,39 @@ module.exports = function () {
         skus: [{
             stock: 100
         }]
+    }, {
+        product: {
+            name: 'The Lord of The Rings',
+            price: 51.99,
+            department: 'Movies',
+            producers: [5]
+        },
+        skus: [{
+            stock: 20,
+            name: 'The Lord of the Rings: The Motion Picture Trilogy (Blu-ray)',
+            img_url: 'https://images-na.ssl-images-amazon.com/images/I/51803W0MkvL.jpg',
+            attributes: {
+                edition: 'Extended Edition',
+                _dvdOrBluray: 'Blu-ray'
+            }
+        }, {
+            stock: 50,
+            name: 'Lord of the Rings: Original Theatrical Trilogy',
+            img_url: 'https://images-na.ssl-images-amazon.com/images/I/919wyzlfPPL._SL1500_.jpg',
+            price: 14.99,
+            attributes: {
+                edition: 'Triple Feature',
+                _dvdOrBluray: 'Blu-ray'
+            }
+        }, {
+            stock: 50,
+            name: 'The Lord of the Rings Collection',
+            price: 9.99,
+            img_url: 'https://images-na.ssl-images-amazon.com/images/I/51-vlplSVCL.jpg',
+            attributes: {
+                edition: 'Triple Feature',
+                _dvdOrBluray: 'DVD'
+            }
+        }]
     }]))
 }
