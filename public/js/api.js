@@ -18,3 +18,12 @@ function getAPI(resource, success, error) {
         error: error
     })
 }
+// function parseAttributes(product) {
+//     const attributes = product.product_attributes.map(attr => ({
+//         id: attr.id,
+//         product_id: attr.product_id,
+//         name: attr.name,
+//         values: attr.product_attribute_values
+//     }));
+//     return attributes;
+// }

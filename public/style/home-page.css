@@ -1,9 +1,9 @@
-.products {
+main.home-page .products {
   display: flex;
   flex-wrap: wrap;
   justify-content: center; }
 
-.products .product {
+main.home-page .products .product {
   box-sizing: border-box;
   margin: 5px;
   padding: 10px;
@@ -16,7 +16,7 @@
   max-height: 300px;
   max-width: 300px; }
 
-.products .product img {
+main.home-page .products .product img {
   height: 100%;
   width: 100%;
   object-fit: contain;

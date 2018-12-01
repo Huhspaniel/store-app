@@ -140,6 +140,7 @@ module.exports = function () {
             price: 120,
             stock: 100,
             attributes: {
+                model: 'Original',
                 storage: '500 GB'
             }
         }]

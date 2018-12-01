@@ -26,6 +26,10 @@ module.exports = function (app) {
         {
             model: db.sku,
             include: [productVariant]
+        },
+        {
+            model: db.product_attribute,
+            include: [db.product_attribute_value]
         }
     ];
 

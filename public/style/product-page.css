@@ -1,10 +1,18 @@
-.product-info {
+main.product-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+main.product-page .product-attributes {
+  padding: 10px; }
+
+main.product-page .product-info {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center; }
 
-.product-info .product {
+main.product-page .product-info .product {
   box-sizing: border-box;
   margin: 5px;
   padding: 10px;
@@ -16,7 +24,7 @@
   max-height: 300px;
   max-width: 300px; }
 
-.product-info .product img {
+main.product-page .product-info .product img {
   height: 100%;
   width: 100%;
   object-fit: contain;
