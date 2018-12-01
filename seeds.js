@@ -64,7 +64,7 @@ module.exports = function () {
             department: 'Cellphones',
             producer_ids: [1],
             img_url: 'https://images-na.ssl-images-amazon.com/images/I/51qibZNVexL._SL1050_.jpg'
-        }, variants: [{
+        }, skus: [{
             name: 'iPhone X, Fully Unlocked, 64 GB, Space Gray',
             price: 1050,
             stock: 100,
@@ -107,7 +107,7 @@ module.exports = function () {
             department: 2,
             producer_ids: [1, 3]
         },
-        variants: [{
+        skus: [{
             name: 'Xbox One X 1TB',
             price: 399,
             stock: 100,
@@ -160,7 +160,7 @@ module.exports = function () {
             img_url: 'https://images-na.ssl-images-amazon.com/images/I/51b-ocpHC8L._SL1200_.jpg',
             producers: [10]
         },
-        variants: [{
+        skus: [{
             name: 'Nord Piano 4 88-Key Stage Piano with 512MB of Sample Memory',
             stock: 0,
             attributes: {
@@ -190,7 +190,7 @@ module.exports = function () {
             img_url: 'https://images-na.ssl-images-amazon.com/images/I/61YjVlrW7hL._SL1500_.jpg',
             producers: [9]
         },
-        variants: [{
+        skus: [{
             name: 'Roland JUNO-DS88 Synthesizer (88-note Weighted-action Keyboard)',
             stock: 10,
             attributes: {
@@ -212,6 +212,16 @@ module.exports = function () {
             attributes: {
                 model: 'DS61'
             }
+        }]
+    }, {
+        product: {
+            name: '4 Film Favorites: The Matrix Collection',
+            price: 12.99,
+            department: 'Movies',
+            img_url: 'https://images-na.ssl-images-amazon.com/images/I/61jv6LrpiqL.jpg'
+        },
+        skus: [{
+            stock: 100
         }]
     }]))
 }

@@ -6,7 +6,7 @@ module.exports = function (connection, Sequelize) {
             unique: 'department_product'
         },
         price: {
-            type: Sequelize.DECIMAL,
+            type: Sequelize.DECIMAL(10, 2),
             allowNull: false,
             validate: {
                 min: 0

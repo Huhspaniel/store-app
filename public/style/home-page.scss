@@ -1,13 +1,7 @@
 main.home-page {
-
     h2 {
         font-size: 20px;
     }
-
-    a {
-        text-decoration: none;
-    }
-
     .products {
         display: flex;
         flex-wrap: wrap;
@@ -16,26 +10,13 @@ main.home-page {
         margin: 0 auto;
     
         .product {
-            box-sizing: border-box;
-            margin: 5px;
-            padding: 10px;
+            @extend %product;
             box-shadow: 0 0 5px black;
-            display: grid;
-            grid-template-rows: min-content 1fr;
-            grid-template-columns: 1fr;
-    
-            height: 100vh;
-            width: 100vw;
             max-height: 300px;
             max-width: 300px;
-    
-            img {
-                height: 100%;
-                width: 100%;
-                object-fit: contain;
-                object-position: center;
+            .stock-status {
+                font-size: inherit;
             }
-
             &:hover {
                 box-shadow: 0 0 10px black;
             }

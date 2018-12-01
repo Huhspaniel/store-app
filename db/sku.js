@@ -1,14 +1,17 @@
 module.exports = function (connection, Sequelize) {
     const sku = connection.define('sku', {
         name: {
-            type: Sequelize.STRING,
-            allowNull: false
+            type: Sequelize.STRING
         },
         price: {
-            type: Sequelize.DECIMAL
+            type: Sequelize.DECIMAL(10, 2),
+            validate: {
+                min: 0
+            }
         },
         stock: {
             type: Sequelize.INTEGER,
+            allowNull: false,
             defaultValue: 0
         },
         img_url: {
