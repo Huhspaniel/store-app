@@ -15,10 +15,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 require('./routes/api-routes')(app);
 require('./routes/html-routes')(app);
 
+// Uncomment line below to clear database and seed with seeds.js
+force = true;
+
 db.sequelize.sync({ force: force }).then(function () {
     app.listen(PORT, function () {
         var seeds = new Promise(res => res());
-        if (force) seeds = require('./seeds.js')();
-        seeds.then(() => console.log(`~~~ App listening on http://localhost:${PORT} ~~~`));
+        if (force) seeds = console.log('\n~~Seeding database:~~\n') || require('./seeds.js')();
+        seeds.then(() => console.log(`\n~~~ App listening on http://localhost:${PORT} ~~~\n`));
     });
 });
