@@ -4,7 +4,7 @@ const path = require('path');
 const PORT = process.env.PORT || 8080;
 const db = require('./db');
 const env = process.env.NODE_ENV || 'development';
-const force = env === 'development';
+let force = env === 'development';
 
 const app = express();
 

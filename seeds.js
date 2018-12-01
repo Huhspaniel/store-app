@@ -25,32 +25,38 @@ module.exports = function () {
     }, {
         name: 'independent'
     }])).then(() => db.producer.bulkCreate([{
-        name: 'Apple',
+        name: 'Apple', // 1
         type: 'corporation'
     }, {
-        name: 'Nintendo',
+        name: 'Nintendo', // 2
         type: 'corporation'
     }, {
-        name: 'Microsoft',
+        name: 'Microsoft', // 3
         type: 'corporation'
     }, {
-        name: 'J.R.R. Tolkien',
+        name: 'J.R.R. Tolkien', // 4
         type: 'author'
     }, {
-        name: 'Peter Jackson',
+        name: 'Peter Jackson', // 5
         type: 'director'
     }, {
-        name: 'IKEA',
+        name: 'IKEA', // 6
         type: 'corporation'
     }, {
-        name: 'Andy Wachowski',
+        name: 'Andy Wachowski', // 7
         type: 'director'
     }, {
-        name: 'Larry Wachowski',
+        name: 'Larry Wachowski', // 8
         type: 'director'
     }, {
-        name: 'Activision',
+        name: 'Activision', // 9
         type: 'corporation'
+    }, {
+        name: 'Nord', // 10
+        type: 'Corporation'
+    }, {
+        name: 'Roland', // 11
+        type: 'Corporation'
     }])).then(() => bulkCreateProducts([{
         product: {
             name: 'iPhone X, Fully Unlocked',
@@ -142,6 +148,67 @@ module.exports = function () {
             attributes: {
                 model: 'Original',
                 storage: '500 GB'
+            }
+        }]
+    }, {
+        product: {
+            name: 'Nord Stage Piano',
+            price: 2999,
+            department: 'Musical Instruments',
+            img_url: 'https://images-na.ssl-images-amazon.com/images/I/51b-ocpHC8L._SL1200_.jpg',
+            producers: [10]
+        },
+        variants: [{
+            name: 'Nord Piano 4 88-Key Stage Piano with 512MB of Sample Memory',
+            stock: 0,
+            attributes: {
+                model: 'Piano 4',
+            }
+        }, {
+            name: 'Nord Piano 3 88-Key Stage Piano with 1GB of Sample Memory',
+            stock: 25,
+            img_url: 'https://images-na.ssl-images-amazon.com/images/I/6131IWeOogL._SL1500_.jpg',
+            attributes: {
+                model: 'Piano 3'
+            }
+        }, {
+            name: 'Nord Stage 3 88 88-Key Digital Stage Piano with Fully Weighted Hammer Action Keybed',
+            price: 4499,
+            stock: 12,
+            img_url: 'https://images-na.ssl-images-amazon.com/images/I/611zFJPgriL._SL1200_.jpg',
+            attributes: {
+                model: 'Stage 3'
+            }
+        }]
+    }, {
+        product: {
+            name: 'Roland JUNO-DS Synthesizer',
+            price: 999.99,
+            department: 'Musical Instruments',
+            img_url: 'https://images-na.ssl-images-amazon.com/images/I/61YjVlrW7hL._SL1500_.jpg',
+            producers: [9]
+        },
+        variants: [{
+            name: 'Roland JUNO-DS88 Synthesizer (88-note Weighted-action Keyboard)',
+            stock: 10,
+            attributes: {
+                model: 'DS88',
+            }
+        }, {
+            name: 'Roland JUNO-DS76 Synthesizer (76-note Weighted-action Keyboard)',
+            stock: 10,
+            price: 899.99,
+            img_url: 'https://images-na.ssl-images-amazon.com/images/I/61f9YlUb00L._SL1500_.jpg',
+            attributes: {
+                model: 'DS76',
+            }
+        }, {
+            name: 'Roalnd JUNO-DS61 Synthesizer (61-note Weighted-action Keyboard)',
+            stock: 10,
+            price: 669.98,
+            img_url: 'https://images-na.ssl-images-amazon.com/images/I/71YJfUnj3DL._SL1500_.jpg',
+            attributes: {
+                model: 'DS61'
             }
         }]
     }]))
