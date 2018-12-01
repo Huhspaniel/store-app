@@ -18,7 +18,7 @@ require('./routes/html-routes')(app);
 db.sequelize.sync({ force: force }).then(function () {
     app.listen(PORT, function () {
         var seeds = new Promise(res => res());
-        if (force) seeds = require('./seeds.js')();
-        seeds.then(() => console.log(`~~~ App listening on http://localhost:${PORT} ~~~`));
+        if (force) seeds = console.log('\n~~Seeding database:~~\n') || require('./seeds.js')();
+        seeds.then(() => console.log(`\n~~~ App listening on http://localhost:${PORT} ~~~\n`));
     });
 });

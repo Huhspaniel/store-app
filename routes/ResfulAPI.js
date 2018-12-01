@@ -9,7 +9,7 @@ module.exports = class RestfulAPI {
             ...middleware, (req, res) => {
                 this.model.findAll({
                     where: identifier ?
-                        { [identifier]: identifier } : undefined,
+                        { [identifier]: req.params[identifier] } : undefined,
                     include: associates || undefined
                 })
                     .then(data => res.json(data))

@@ -4,7 +4,9 @@ main.product-page {
   align-items: center; }
 
 main.product-page h2 {
-  font-size: 20px; }
+  font-size: 30px;
+  text-align: center;
+  padding: 10px; }
 
 main.product-page .product-attributes {
   padding: 10px; }
@@ -23,11 +25,22 @@ main.product-page .product-info .product {
   grid-template-rows: min-content 1fr;
   grid-template-columns: 1fr;
   height: 100vh;
-  width: 100vw;
-  max-height: 300px;
-  max-width: 300px; }
+  width: 700px;
+  max-height: 500px;
+  max-width: 100vw; }
+
+main.product-page .product-info .product .price {
+  color: black;
+  font-size: 20px;
+  text-align: right;
+  float: right; }
+
+main.product-page .product-info .product .stock-status {
+  font-size: 20px; }
 
 main.product-page .product-info .product img {
+  box-sizing: border-box;
+  padding: 15px;
   height: 100%;
   width: 100%;
   object-fit: contain;

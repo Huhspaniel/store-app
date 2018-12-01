@@ -39,7 +39,7 @@ module.exports = function (db) {
     }
     function parseSkus(skus) {
         const attributes = skus.reduce((accumulator, sku) => {
-            Object.entries(sku.attributes).forEach(([attr, value]) => {
+            if (sku.attributes) Object.entries(sku.attributes).forEach(([attr, value]) => {
                 accumulator.pushIfNotExist(
                     { name: attr, values: [value] },
                     (a, b) => a.name === b.name,
@@ -53,7 +53,7 @@ module.exports = function (db) {
             return accumulator;
         }, []);
         const variants = skus.reduce((accumulator, sku, i) => {
-            accumulator.push(
+            if (sku.attributes) accumulator.push(
                 ...Object.entries(sku.attributes)
                     .map(([attr, val]) => ({ sku_index: i, attribute: attr, value: val }))
             )
@@ -105,7 +105,7 @@ module.exports = function (db) {
             })
     }
     function bulkCreateProducts(products) {
-        const productsPromises = products.map(({ product, variants }) => createProduct(product, variants));
+        const productsPromises = products.map(({ product, skus }) => createProduct(product, skus));
         return Promise.all(productsPromises);
     }
 }
