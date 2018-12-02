@@ -74,6 +74,12 @@ function renderProductPage(query) {
         }
     })
 
+    document.querySelector('.product-quantity').addEventListener('input', e => {
+        e.preventDefault();
+        const total = (e.target.value * 100 * (sku.price || product.price) || '000').toString();
+        document.querySelector('.total-price').innerHTML = `Total: $${total.slice(0, -2)}.${total.slice(-2)}`;
+    })
+
     getAPI(`products/${query.prod}`, data => {
         if (!data.error) product = data
         getAPI(`skus/${query.sku}`, data => {

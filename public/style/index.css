@@ -104,6 +104,10 @@ footer {
     .product-page .order-form input, .product-page .order-form button {
       padding: 7px;
       font-size: 16px; }
+    .product-page .order-form .total-price {
+      padding: 10px;
+      font-size: 17px;
+      text-align: center; }
 
 .hidden {
   display: none; }
