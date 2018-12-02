@@ -14,6 +14,26 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 require('./routes/api-routes')(app);
 require('./routes/html-routes')(app);
+const limitPrice = 20000;
+app.post('/order', (req, res) => {
+    db.sku.findById(req.body.sku_id, { include: [db.product] })
+        .then(({ price, stock, product: { globalPrice, in_stock, product_id } }) => {
+            if (!in_stock) return res.json({ error: 'Product is out of stock' });
+            price = price || globalPrice;
+            if (req.body.quantity > stock || req.body.quantity * price > limitPrice) {
+                res.json({ error: 'Invalid quantity' });
+            } else {
+                return db.sku.decrement('stock', {
+                    by: req.body.quantity,
+                    where: {
+                        id: req.body.sku_id
+                    }
+                })
+            }
+        })
+        .then(data => res.json(data))
+        .catch(err => res.json(err));
+});
 
 db.sequelize.sync({ force: force }).then(function () {
     app.listen(PORT, function () {

@@ -12,7 +12,10 @@ module.exports = function (connection, Sequelize) {
         stock: {
             type: Sequelize.INTEGER,
             allowNull: false,
-            defaultValue: 0
+            defaultValue: 0,
+            validate: {
+                min: 0
+            }
         },
         img_url: {
             type: Sequelize.STRING

@@ -50,6 +50,53 @@ function renderProductPage(query) {
         window.location.search = `?prod=${product.id}&sku=${selectedSku.id}`;
     })
 
+    let quantity = 0;
+    const limitPrice = 20000;
+    let total = '$---';
+    document.querySelector('.submit-order').addEventListener('click', e => {
+        e.preventDefault();
+        if (quantity) {
+            ajaxJSON({
+                type: 'POST',
+                url: `/order`,
+                data: {
+                    quantity: quantity,
+                    sku_id: sku.id
+                },
+                success(data) {
+                    console.log(data);
+                    if (!data.error) window.location.reload();
+                },
+                error(err) {
+                    console.log(err)
+                }
+            })
+        } else {
+            console.log('Please enter a quantity')
+        }
+    });
+    document.querySelector('.total-price').innerHTML = 'Total: ' + total;
+    document.querySelector('.product-quantity').addEventListener('input', e => {
+        e.preventDefault();
+
+        quantity = parseInt(e.target.value);
+        if (!quantity || quantity < 0) {
+            e.target.value = quantity = '';
+        } else if (quantity * (sku.price || product.price) > limitPrice) {
+            e.target.value = quantity = parseInt(limitPrice / (sku.price || product.price));
+        } else {
+            e.target.value = quantity;
+        }
+
+        if (quantity) {
+            total = (quantity * 100 * (sku.price || product.price)).toString();
+            total = `$${total.slice(0, -2)}.${total.slice(-2)}`;
+        } else {
+            total = '$---';
+        }
+        document.querySelector('.total-price').innerHTML = 'Total: ' + total;
+    })
+
     getAPI(`products/${query.prod}`, data => {
         if (!data.error) product = data
         getAPI(`skus/${query.sku}`, data => {
