@@ -50,6 +50,30 @@ function renderProductPage(query) {
         window.location.search = `?prod=${product.id}&sku=${selectedSku.id}`;
     })
 
+    document.querySelector('.submit-order').addEventListener('click', e => {
+        e.preventDefault();
+        const quantity = document.querySelector('.product-quantity').value;
+        if (quantity) {
+            ajaxJSON({
+                type: 'POST',
+                url: `/order`,
+                data: {
+                    quantity: quantity,
+                    sku_id: sku.id
+                },
+                success(data) {
+                    console.log(data);
+                    if (!data.error) window.location.reload();
+                },
+                error(err) {
+                    console.log(err)
+                }
+            })
+        } else {
+            console.log('Please enter a quantity')
+        }
+    })
+
     getAPI(`products/${query.prod}`, data => {
         if (!data.error) product = data
         getAPI(`skus/${query.sku}`, data => {

@@ -14,6 +14,22 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 require('./routes/api-routes')(app);
 require('./routes/html-routes')(app);
+app.post('/order', (req, res) => {
+    db.sku.findById(req.body.sku_id)
+        .then(data => {
+            if (req.body.quantity > data.stock)
+                res.json({ error: 'Invalid quantity' })
+            else
+                return db.sku.decrement('stock', {
+                    by: req.body.quantity,
+                    where: {
+                        id: req.body.sku_id
+                    }
+                })
+        })
+        .then(data => res.json(data))
+        .catch(err => res.json(err));
+});
 
 db.sequelize.sync({ force: force }).then(function () {
     app.listen(PORT, function () {
