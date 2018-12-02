@@ -50,9 +50,10 @@ function renderProductPage(query) {
         window.location.search = `?prod=${product.id}&sku=${selectedSku.id}`;
     })
 
+    let quantity = 0;
+    let total = '$---';
     document.querySelector('.submit-order').addEventListener('click', e => {
         e.preventDefault();
-        const quantity = document.querySelector('.product-quantity').value;
         if (quantity) {
             ajaxJSON({
                 type: 'POST',
@@ -63,7 +64,7 @@ function renderProductPage(query) {
                 },
                 success(data) {
                     console.log(data);
-                    if (!data.error) window.location.reload();
+                    // if (!data.error) window.location.reload();
                 },
                 error(err) {
                     console.log(err)
@@ -72,12 +73,22 @@ function renderProductPage(query) {
         } else {
             console.log('Please enter a quantity')
         }
-    })
-
+    });
+    document.querySelector('.total-price').innerHTML = 'Total: ' + total;
     document.querySelector('.product-quantity').addEventListener('input', e => {
         e.preventDefault();
-        const total = (e.target.value * 100 * (sku.price || product.price) || '000').toString();
-        document.querySelector('.total-price').innerHTML = `Total: $${total.slice(0, -2)}.${total.slice(-2)}`;
+
+        quantity = parseInt(e.target.value);
+        if (!quantity || quantity < 0) e.target.value = '';
+        else e.target.value = quantity;
+
+        if (quantity) {
+            total = (quantity * 100 * (sku.price || product.price)).toString();
+            total = `$${total.slice(0, -2)}.${total.slice(-2)}`;
+        } else {
+            total = '$---';
+        }
+        document.querySelector('.total-price').innerHTML = 'Total: ' + total;
     })
 
     getAPI(`products/${query.prod}`, data => {

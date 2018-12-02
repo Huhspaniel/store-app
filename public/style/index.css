@@ -105,9 +105,11 @@ footer {
       padding: 7px;
       font-size: 16px; }
     .product-page .order-form .total-price {
-      padding: 10px;
+      padding: 30px;
+      padding-left: 0;
       font-size: 17px;
-      text-align: center; }
+      width: 100%;
+      text-align: left; }
 
 .hidden {
   display: none; }
