@@ -51,6 +51,7 @@ function renderProductPage(query) {
     })
 
     let quantity = 0;
+    const limitPrice = 20000;
     let total = '$---';
     document.querySelector('.submit-order').addEventListener('click', e => {
         e.preventDefault();
@@ -64,7 +65,7 @@ function renderProductPage(query) {
                 },
                 success(data) {
                     console.log(data);
-                    // if (!data.error) window.location.reload();
+                    if (!data.error) window.location.reload();
                 },
                 error(err) {
                     console.log(err)
@@ -79,8 +80,13 @@ function renderProductPage(query) {
         e.preventDefault();
 
         quantity = parseInt(e.target.value);
-        if (!quantity || quantity < 0) e.target.value = '';
-        else e.target.value = quantity;
+        if (!quantity || quantity < 0) {
+            e.target.value = quantity = '';
+        } else if (quantity * (sku.price || product.price) > limitPrice) {
+            e.target.value = quantity = parseInt(limitPrice / (sku.price || product.price));
+        } else {
+            e.target.value = quantity;
+        }
 
         if (quantity) {
             total = (quantity * 100 * (sku.price || product.price)).toString();
